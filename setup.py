@@ -26,7 +26,7 @@ setup(
         'cchardet',
         'httptools',
     ],
-    license='Apache 2.0',
+    license='MIT',
     packages=find_packages(),
     py_modules=['ashttp'],
     include_package_data=True,
