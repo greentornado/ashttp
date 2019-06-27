@@ -1,6 +1,6 @@
 # Overview
 
-Fast async http client
+Super fast asynchronous HTTP client. I can't wait The requests 3.0. So I create one.
 
 ## Installation
 
