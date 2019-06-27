@@ -20,18 +20,22 @@ __version__ = '0.1.0'
 class Response:
     def __init__(self):
         self.headers: dict = {}
-        self.body: bytes = b""
+        self._body: bytes = b""
         self.status_code: int = 0
 
     def on_header(self, name: bytes, value: bytes):
         self.headers[name.decode()] = value.decode()
 
     def on_body(self, body: bytes):
-        self.body += body
+        self._body += body
+
+    @property
+    def body(self):
+        result = chardet.detect(self._body)
+        return self._body.decode(result['encoding'] or "utf8")
 
     async def json(self):
-        result = chardet.detect(self.body)
-        return json.loads(self.body.decode(result['encoding'] or "utf8"))
+        return json.loads(self.body)
 
     def __repr__(self):
         return f"<Response {self.status_code}>"
